@@ -16,6 +16,7 @@ mongoose
 //add body parser middle ware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 //use routes
 app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
