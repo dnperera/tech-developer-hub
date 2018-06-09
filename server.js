@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const passport = require("passport");
 const { postRoutes, profileRoutes, userRoutes } = require("./routes");
 const { mongoURI } = require("./config/keys");
 
@@ -16,6 +17,11 @@ mongoose
 //add body parser middle ware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//add passport middle ware
+app.use(passport.initialize());
+//passport config
+require("./config/passport")(passport);
 
 //use routes
 app.use("/api/users", userRoutes);
