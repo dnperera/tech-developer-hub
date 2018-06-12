@@ -85,9 +85,8 @@ router.post("/login", (req, res) => {
         };
         jwt.sign(payload, jwtSecret, { expiresIn: "1h" }, (err, token) => {
           if (err) {
-            return res
-              .status(404)
-              .json({ token: "Error in creating new token" });
+            errors.token = "Error in creating new token";
+            return res.status(404).json(errors);
           } else {
             res.json({
               success: true,
