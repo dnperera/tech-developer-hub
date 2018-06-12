@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Profile = require("../../models/Profile");
 
 //@route Get api/profile/test
 //@desc Tests profile route
