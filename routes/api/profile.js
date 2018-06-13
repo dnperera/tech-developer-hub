@@ -7,6 +7,7 @@ const User = require("../../models/User");
 //load validation
 const validateProfileInputs = require("../../validation/profile");
 const validateExperienceInputs = require("../../validation/experience");
+const validateEducationInputs = require("../../validation/education");
 //@route Get api/profile
 //@desc Get current user's profile
 //@access Private
@@ -150,7 +151,7 @@ router.post(
   }
 );
 
-//@route Post api/experience
+//@route Post api/profile/experience
 //@desc Add experience user's profile
 //@access Private
 
@@ -178,6 +179,90 @@ router.post(
       //then save or update the profile
       profile.save().then(profile => res.json(profile));
     });
+  }
+);
+//@route Post api/profile/education
+//@desc Add education details user's profile
+//@access Private
+
+router.post(
+  "/education",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEducationInputs(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newEdu = {
+        school: req.body.school,
+        degree: req.body.degree,
+        fieldofstudy: req.body.fieldofstudy,
+        from: req.body.from,
+        to: req.body.to,
+        current: req.body.current,
+        description: req.body.description
+      };
+      //Add Education to the array
+      profile.education.unshift(newEdu);
+      //then save or update the profile
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+///@route Delete api/profile/experience:exp_id
+//@desc delete selected experience
+//@access Private
+
+router.delete(
+  "/experience/:exp_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        //remove the selected experience and update the experience array
+        const newExpArray = profile.experience.filter(
+          exp => exp.id !== req.params.exp_id
+        );
+        //now update the experience array
+        profile.experience = [...newExpArray];
+        //then save or update the profile
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => {
+        errors.experience = "Error in deleting selected experience!.";
+        res.status(404).json(errors);
+      });
+  }
+);
+
+///@route Delete api/profile/education:edu_id
+//@desc delete selected education details
+//@access Private
+
+router.delete(
+  "/education/:edu_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let errors = {};
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        //remove the selected education and update the education array
+        const newEduArray = profile.education.filter(
+          edu => edu.id !== req.params.edu_id
+        );
+        //now update the experience array
+        profile.education = [...newEduArray];
+        //then save or update the profile
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => {
+        errors.experience = "Error in deleting selected education!.";
+        res.status(404).json(errors);
+      });
   }
 );
 module.exports = router;
