@@ -22,27 +22,37 @@ module.exports = validateProfileInputs = data => {
 
   if (!isEmpty(data.website)) {
     if (!Validator.isURL(data.website)) {
-      errors.webiste = "Not a valid website URL";
+      errors.website = "Not a valid URL";
     }
   }
+
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
-      errors.youtube = "Not a valid Youtube URL";
+      errors.youtube = "Not a valid URL";
     }
   }
-  if (!isEmpty(data.linkedin)) {
-    if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = "Not a valid Linkedin URL";
-    }
-  }
+
   if (!isEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
-      errors.twitter = "Not a valid twitter URL";
+      errors.twitter = "Not a valid URL";
     }
   }
+
+  if (!isEmpty(data.facebook)) {
+    if (!Validator.isURL(data.facebook)) {
+      errors.facebook = "Not a valid URL";
+    }
+  }
+
+  if (!isEmpty(data.linkedin)) {
+    if (!Validator.isURL(data.linkedin)) {
+      errors.linkedin = "Not a valid URL";
+    }
+  }
+
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
-      errors.instagram = "Not a valid instagram URL";
+      errors.instagram = "Not a valid URL";
     }
   }
 
