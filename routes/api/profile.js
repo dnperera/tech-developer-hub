@@ -6,7 +6,7 @@ const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 //load validation
 const validateProfileInputs = require("../../validation/profile");
-
+const validateExperienceInputs = require("../../validation/experience");
 //@route Get api/profile
 //@desc Get current user's profile
 //@access Private
@@ -46,6 +46,25 @@ router.get("/user/:user_id", (req, res) => {
     .catch(err => {
       errors.noprofile = "Profile is not found!";
       res.json(errors);
+    });
+});
+//@route Get api/profile/all
+//@desc Get all profiles
+//@access Public
+router.get("/all", (req, res) => {
+  const errors = {};
+  Profile.find({})
+    .populate("user", ["name", "avatar"])
+    .then(profiles => {
+      if (!profiles) {
+        errors.noprofile = "No profiles found!";
+        return res.status(404).json(errors);
+      }
+      res.json(profiles);
+    })
+    .catch(err => {
+      errors.noprofile = "Profiles not found!";
+      res.status(404).json(errors);
     });
 });
 
@@ -127,6 +146,37 @@ router.post(
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
+    });
+  }
+);
+
+//@route Post api/experience
+//@desc Add experience user's profile
+//@access Private
+
+router.post(
+  "/experience",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateExperienceInputs(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      const newExp = {
+        title: req.body.title,
+        company: req.body.company,
+        location: req.body.location,
+        from: req.body.from,
+        to: req.body.to,
+        current: req.body.current,
+        description: req.body.description
+      };
+      //Add Experience to the array
+      profile.experience.unshift(newExp);
+      //then save or update the profile
+      profile.save().then(profile => res.json(profile));
     });
   }
 );
