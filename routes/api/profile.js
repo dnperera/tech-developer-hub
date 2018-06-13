@@ -265,4 +265,26 @@ router.delete(
       });
   }
 );
+
+///@route Delete api/profile
+//@desc delete user & profile
+//@access Private
+
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    let errors = {};
+    Profile.findOneAndRemove({ user: req.user.id })
+      .then(() => {
+        User.findOneAndRemove({ _id: req.user.id }).then(() => {
+          res.json({ success: true });
+        });
+      })
+      .catch(err => {
+        errors.experience = "Error in deleting user and profile!.";
+        res.status(404).json(errors);
+      });
+  }
+);
 module.exports = router;
