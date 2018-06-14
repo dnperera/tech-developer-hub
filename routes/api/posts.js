@@ -6,13 +6,34 @@ const passport = require("passport");
 const Post = require("../../models/Post");
 //Load Validations
 const validatePostInputs = require("../../validation/post");
-//@route Get api/posts/test
-//@desc Tests post route
-//@access Public
-router.get("/test", (req, res) => {
-  res.json({ msg: "Your Posts Route" });
+
+//@route Get api/posts
+//@desc Get all available posts
+//@access public
+router.get("/", (req, res) => {
+  const errors = {};
+  Post.find({})
+    .sort({ date: -1 })
+    .then(posts => res.json(posts))
+    .catch(error => {
+      errors.nopostsfound = "No posts found";
+      res.status(404).json(errors);
+    });
 });
 
+//@route Get api/posts/:id
+//@desc Get a post by id.
+//@access public
+router.get("/:id", (req, res) => {
+  const errors = {};
+  Post.findById(req.params.id)
+    .then(post => res.json(post))
+    .catch(error => {
+      errors.nopostfound = "No post found.";
+      console.log(error);
+      res.status(404).json(errors);
+    });
+});
 //@route Post api/posts
 //@desc create new post route
 //@access private
