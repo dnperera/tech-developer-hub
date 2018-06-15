@@ -1,0 +1,22 @@
+version: '3.6'
+services:
+  backend-api:
+    container_name: backend
+    image: docker-node-express-mongoapp
+    build: ./
+    command: npm start
+    #working_dir: /Users/dayanperera/Documents/Udemy/tech-developer-hub
+    volumes:
+      - ./:/Users/dayanperera/Documents/Udemy/tech-developer-hub
+      - /Users/dayanperera/Documents/Udemy/tech-developer-hub/node_modules
+    ports:
+      - "8000:8000"
+    depends_on:
+          - "mongo"
+  mongo:
+    container_name: mongoDB
+    image: "mongo"
+    ports:
+      - "27017:27017"
+
+
