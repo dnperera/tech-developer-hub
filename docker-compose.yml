@@ -1,6 +1,6 @@
 version: '3.6'
 services:
-  backend-api:
+  tech-hub-api:
     container_name: tech-hub-backend
     build: ./
     command: npm start
@@ -13,8 +13,10 @@ services:
     depends_on:
           - "mongodatabase"
   mongodatabase:
-    container_name: techhubdb
-    image: "mongo"
+    container_name: tech-hub-db
+    image: "mongo:3.2.20"
+    volumes:
+      - ./data/:/data/db
     ports:
       - "27017:27017"
 
