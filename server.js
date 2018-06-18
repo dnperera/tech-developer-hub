@@ -8,7 +8,12 @@ const { mongoURI } = require("./config/keys");
 //create server
 const app = express();
 const PORT = 5000;
+
 //eatablish db connection
+if (process.env.MONGO_URI) {
+  mongoURI = process.env.MONGO_URI;
+}
+
 mongoose
   .connect(mongoURI)
   .then(() => console.log("MongoDB connection successfull !!!"))
