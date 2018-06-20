@@ -72,7 +72,7 @@ router.post("/login", (req, res) => {
     //check user exists
     if (!user) {
       errors.email = "User not found";
-      return res.status(404).json({ errors });
+      return res.status(404).json(errors);
     }
     //Check user entered password match with db
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -85,8 +85,9 @@ router.post("/login", (req, res) => {
         };
         jwt.sign(payload, jwtSecret, { expiresIn: "1h" }, (err, token) => {
           if (err) {
-            errors.token = "Error in creating new token";
-            return res.status(404).json(errors);
+            return res
+              .status(404)
+              .json({ token: "Error in creating new token" });
           } else {
             res.json({
               success: true,
