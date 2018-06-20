@@ -18,6 +18,13 @@ class Register extends Component {
     //this.onChange=this.onChange.bind(this);
     //this.onSubmit=this.onSubmit.bind(this);
   }
+  //if the user already logged in , if user try to access login page via address bar , it will be directed to dashboard page .
+  componentDidMount() {
+    if (this.props.auth.isAuthenticate) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({

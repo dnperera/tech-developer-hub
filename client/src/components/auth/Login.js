@@ -25,6 +25,12 @@ class Login extends Component {
     };
     this.props.loginUser(user);
   };
+  //if the user already logged in , if user try to access login page via address bar , it will be directed to dashboard page .
+  componentDidMount() {
+    if (this.props.auth.isAuthenticate) {
+      this.props.history.push("/dashboard");
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticate) {
       this.props.history.push("/dashboard");
