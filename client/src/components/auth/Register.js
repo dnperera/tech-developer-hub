@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { registerUser } from "../../actions/authActions";
@@ -26,7 +25,6 @@ class Register extends Component {
       this.props.history.push("/dashboard");
     }
   }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
@@ -76,8 +74,7 @@ class Register extends Component {
                   error={errors.email}
                   type="email"
                   onChange={this.onChange}
-                  info="This site uses Gravatar so if you want a profile image, use
-                    a Gravatar email"
+                  info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                 />
                 <TextFieldGroup
                   name="password"
