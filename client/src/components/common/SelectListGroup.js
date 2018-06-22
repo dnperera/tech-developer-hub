@@ -11,13 +11,12 @@ const SelectListGroup = ({
   onChange,
   options
 }) => {
-  const selectOptions = options.map(option => {
-    return (
-      <option key={option.lable} value={option.value}>
-        {option.lable}
-      </option>
-    );
-  });
+  const selectOptions = options.map((option, index) => (
+    <option key={index} value={option.value}>
+      {option.label}
+    </option>
+  ));
+
   return (
     <div className="form-group">
       <select
@@ -39,10 +38,9 @@ const SelectListGroup = ({
 SelectListGroup.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  error: PropTypes.string,
   info: PropTypes.string,
+  error: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired
 };
-
 export default SelectListGroup;
