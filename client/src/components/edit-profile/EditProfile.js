@@ -94,6 +94,7 @@ class EditProfile extends Component {
         : "";
       // Set component fields state
       this.setState({
+        displaySocialInputs: profile.social ? true : false,
         handle: profile.handle,
         company: profile.company,
         website: profile.website,
