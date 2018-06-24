@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import PropTypes from "prop-types";
-
+import { addExperience } from "../../actions/profileActions";
 class AddExperience extends Component {
   constructor(props) {
     super(props);
@@ -25,15 +25,35 @@ class AddExperience extends Component {
       [e.target.name]: e.target.value
     });
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
   onCheck = e => {
     this.setState({
       current: !this.state.current,
       disabled: !this.state.disabled
     });
   };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const expData = {
+      title: this.state.title,
+      company: this.state.company,
+      location: this.state.location,
+      from: this.state.from,
+      to: this.state.to,
+      description: this.state.description,
+      current: this.state.current
+    };
+    this.props.addExperience(expData, this.props.history);
+  };
   render() {
-    console.log(this.props.state);
-    const errors = {};
+    const { errors } = this.state;
     //const { errors } = this.props.state;
     return (
       <div className="section add-experience">
@@ -127,6 +147,10 @@ const mapStateToProps = state => {
 };
 AddExperience.propTypes = {
   profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  addExperience: PropTypes.func.isRequired
 };
-export default connect(mapStateToProps)(withRouter(AddExperience));
+export default connect(
+  mapStateToProps,
+  { addExperience }
+)(withRouter(AddExperience));
