@@ -37,3 +37,6 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+.table-font {
+  font-size: 1rem;
+}
