@@ -54,17 +54,14 @@ export const addExperience = (expData, history) => dispatch => {
     });
 };
 // Add Education
-export const addEducation = (expData, history) => dispatch => {
+export const addEducation = (eduData, history) => dispatch => {
   axios
-    .post("/api/profile/education", expData)
+    .post("/api/profile/education", eduData)
     .then(res => {
       history.push("/dashboard");
     })
     .catch(err => {
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      });
+      dispatch({ type: GET_ERRORS, payload: err.response.data });
     });
 };
 

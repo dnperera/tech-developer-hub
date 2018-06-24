@@ -9,9 +9,9 @@ class AddEducation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      company: "",
-      location: "",
+      school: "",
+      degree: "",
+      fieldofstudy: "",
       from: "",
       to: "",
       current: false,
@@ -41,55 +41,54 @@ class AddEducation extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const expData = {
-      title: this.state.title,
-      company: this.state.company,
-      location: this.state.location,
+    const eduData = {
+      school: this.state.school,
+      degree: this.state.degree,
+      fieldofstudy: this.state.fieldofstudy,
       from: this.state.from,
       to: this.state.to,
-      description: this.state.description,
-      current: this.state.current
+      current: this.state.current,
+      description: this.state.description
     };
-    this.props.addExperience(expData, this.props.history);
+    this.props.addEducation(eduData, this.props.history);
   };
   render() {
     const { errors } = this.state;
     //const { errors } = this.props.state;
     return (
-      <div className="section add-experience">
+      <div className="section add-education">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link>
-              <h1 className="display-4 text-center">Add Your Experience</h1>
+              <h1 className="display-4 text-center">Add Your Education</h1>
               <p className="lead text-center">
-                Add any developer/programming positions that you have had in the
-                past
+                Add any school, bootcamp, etc that you have attended
               </p>
               <small className="d-block pb-3">* = required field</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Job Title"
-                  name="title"
-                  value={this.state.title}
+                  placeholder="* School Or Bootcamp"
+                  name="school"
+                  value={this.state.school}
                   onChange={this.onChange}
-                  error={errors.title}
+                  error={errors.school}
                 />
                 <TextFieldGroup
-                  placeholder="* Company"
-                  name="company"
-                  value={this.state.company}
+                  placeholder="* Degree Or Certificate"
+                  name="degree"
+                  value={this.state.degree}
                   onChange={this.onChange}
-                  error={errors.company}
+                  error={errors.degree}
                 />
                 <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
+                  placeholder="* Field Of Study"
+                  name="fieldofstudy"
+                  value={this.state.fieldofstudy}
                   onChange={this.onChange}
-                  error={errors.location}
+                  error={errors.fieldofstudy}
                 />
                 <h6>From Date</h6>
                 <TextFieldGroup
@@ -123,12 +122,12 @@ class AddEducation extends Component {
                   </label>
                 </div>
                 <TextAreaFieldGroup
-                  placeholder="Job Description"
+                  placeholder="Program Description"
                   name="description"
                   value={this.state.description}
                   onChange={this.onChange}
                   error={errors.description}
-                  info="Tell us about the the position"
+                  info="Tell us about your experience and what you learned"
                 />
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
@@ -145,7 +144,7 @@ const mapStateToProps = state => {
     errors: state.errors
   };
 };
-AddExperience.propTypes = {
+AddEducation.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   addEducation: PropTypes.func.isRequired
