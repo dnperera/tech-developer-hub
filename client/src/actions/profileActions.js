@@ -42,7 +42,7 @@ export const getProfiles = () => dispatch => {
       console.log("Error in getting profile-->", err);
       dispatch({
         type: GET_PROFILES,
-        payload: {}
+        payload: null
       });
     });
 };
