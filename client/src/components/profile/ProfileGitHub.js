@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-class ProfileCreds extends Component {
+class ProfileGitHub extends Component {
   render() {
     return (
       <div>
-        <h1>Profile Credential</h1>
+        <h1>Profile Git Hub</h1>
       </div>
     );
   }
 }
-export default ProfileCreds;
+export default ProfileGitHub;
