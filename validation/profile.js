@@ -21,8 +21,12 @@ module.exports = validateProfileInputs = data => {
   }
 
   if (!isEmpty(data.website)) {
+    // const options = {
+    //   protocols: ["http", "https"],
+    //   require_protocol: true
+    // };
     if (!Validator.isURL(data.website)) {
-      errors.website = "Not a valid URL";
+      errors.website = "URL needs to starts with http or https";
     }
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import isEmpty from "../../validation/isEmpty";
+import checkURLProtocall from "../../validation/prefixURL";
 
 class ProfileHeader extends Component {
   render() {
@@ -30,7 +31,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.website) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.website}
+                    href={checkURLProtocall(profile.website)}
                     target="_blank"
                   >
                     <i className="fas fa-globe fa-2x" />
@@ -39,7 +40,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.twitter) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.twitter}
+                    href={checkURLProtocall(profile.social.twitter)}
                     target="_blank"
                   >
                     <i className="fab fa-twitter fa-2x" />
@@ -48,7 +49,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.facebook) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.facebook}
+                    href={checkURLProtocall(profile.social.facebook)}
                     target="_blank"
                   >
                     <i className="fab fa-facebook fa-2x" />
@@ -57,7 +58,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.linkedin) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.linkedin}
+                    href={checkURLProtocall(profile.social.linkedin)}
                     target="_blank"
                   >
                     <i className="fab fa-linkedin fa-2x" />
@@ -66,7 +67,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.instagram) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.instagram}
+                    href={checkURLProtocall(profile.social.instagram)}
                     target="_blank"
                   >
                     <i className="fab fa-instagram fa-2x" />
@@ -75,7 +76,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social.youtube) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.youtube}
+                    href={checkURLProtocall(profile.social.youtube)}
                     target="_blank"
                   >
                     <i className="fab fa-youtube fa-2x" />
