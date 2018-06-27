@@ -20,6 +20,7 @@ import Profile from "./components/profile/Profile";
 import "./App.css";
 import store from "./store";
 import PrivateRoute from "./components/common/PrivateRoute";
+import Post from "./components/posts/Post";
 import NotFound from "./components/not-found/not-found";
 
 //check for token
