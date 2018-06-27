@@ -20,7 +20,6 @@ export const getCurrentProfile = () => dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in getting profile-->", err);
       dispatch({
         type: GET_PROFILE,
         payload: {}

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import PostForm from "./PostForm";
 
-class Post extends Component {
+class Posts extends Component {
   render() {
     return (
       <div className="feed">
@@ -19,4 +19,4 @@ class Post extends Component {
     );
   }
 }
-export default connect(null)(Post);
+export default Posts;
