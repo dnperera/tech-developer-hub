@@ -20,11 +20,14 @@ class ProfileGitHub extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        this.setState({
-          repos: data
-        });
+        if (this.refs.gitRepos) {
+          this.setState({
+            repos: data
+          });
+        }
       });
   }
+
   render() {
     const { repos } = this.state;
     const repoItems = repos.map(repo => (
@@ -53,7 +56,7 @@ class ProfileGitHub extends Component {
       </div>
     ));
     return (
-      <div>
+      <div ref="gitRepos">
         <hr />
         <h3 className="mb-4">Latest Github Repos</h3>
 
