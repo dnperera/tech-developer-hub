@@ -109,7 +109,7 @@ router.post(
           //Check user already liked this post
           if (
             post.likes.filter(like => {
-              like.user.toString() === req.user.id;
+              return like.user.toString() === req.user.id;
             }).length > 0
           ) {
             return res.status(400).json({
