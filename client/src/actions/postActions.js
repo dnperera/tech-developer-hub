@@ -59,6 +59,30 @@ export const deletePost = id => dispatch => {
       });
     });
 };
+//Add Like for a post
+export const likePost = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(dispatch(getPosts()))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
+//Remove Like  from a post
+export const removelikePost = id => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${id}`)
+    .then(dispatch(getPosts()))
+    .catch(err => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
+};
 //Profile Loading Status
 export const setPostLoading = () => {
   return {
