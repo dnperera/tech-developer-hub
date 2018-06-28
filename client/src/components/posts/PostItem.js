@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { deletePost } from "../../actions/postActions";
 
 class PostItem extends Component {
   onClickDelete(id) {
-    console.log(id);
+    this.props.deletePost(id);
   }
   render() {
     const { post, auth } = this.props;
@@ -52,11 +53,15 @@ class PostItem extends Component {
 
 PostItem.propTypes = {
   post: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  deletePost: PropTypes.func.isRequired
 };
 const mapStateToProp = state => {
   return {
     auth: state.auth
   };
 };
-export default connect(mapStateToProp)(PostItem);
+export default connect(
+  mapStateToProp,
+  { deletePost }
+)(PostItem);
