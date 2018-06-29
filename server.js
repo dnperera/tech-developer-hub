@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -35,6 +36,15 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/posts", postRoutes);
+
+//Serve static assests if in production mode
+if (process.env.NODE_ENV === "production") {
+  //set the static assets
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 //start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

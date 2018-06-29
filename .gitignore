@@ -1,6 +1,6 @@
-node_modules
+/node_modules
 package-lock.json
-keys.js
+/config/keys_dev.js
 .DS_Store
 data/journal
 data
